@@ -25,7 +25,7 @@
               <div class="item-inner"> 
                 <div class="item-title label">Character</div>
                 <div class="item-input">
-                  <input type="text" onchange="updateCode()" placeholder="Enter character to search"/>
+                  <input type="text" onchange="updateCode()" maxlength="2" placeholder="Enter character to search"/>
                 </div>
               </div>
             </div>
@@ -39,7 +39,7 @@
         <div class="row">
           <div class="col-50"><a href="#" class="button button-big button-fill color-red">Clear</a></div>
           <div class="col-50">
-            <input type="submit" value="Search" class="button button-big button-fill color-green"/>
+            <input type="submit" value="Search" onclick="showDetails()"class="button button-big button-fill color-green"/>
           </div>
         </div>
       </div>

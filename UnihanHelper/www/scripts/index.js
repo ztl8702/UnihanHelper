@@ -16,6 +16,11 @@
         if (window.MobileAccessibility) {
             window.MobileAccessibility.usePreferredTextZoom(false);
         }
+
+        if (window.registerBackKey) {
+            console.log("Platform Windows! Register BackKey!")
+            window.registerBackKey();
+        }
         
     };
 

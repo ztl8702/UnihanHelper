@@ -103,5 +103,28 @@ myApp.onPageInit('about', function (page) {
         items: nums,
         template: '<li class="item-content"><div clas="item-inner"><div class="item-title">{{title}}</div></div></li>'
     });
+    console.log("initonce");
 });
 
+myApp.onPageInit('details', function (page) {
+    //Query
+    db.get(window.unicodeCodePoint).then(function (doc) {
+        $("#kkCharacter")[0].textContent = codePointToChar(window.unicodeCodePoint);
+        $("#kkUnicodeCodePoint")[0].textContent = window.unicodeCodePoint;
+
+        $("#kMandarin")[0].textContent = doc.kMandarin;
+        $("#kPhonetic")[0].textContent = doc.kPhonetic;
+        $("#kTotalStrokes")[0].textContent = doc.kTotalStrokes;
+        $("#kCantonese")[0].textContent = doc.kCantonese;
+        $("#kCihaiT")[0].textContent = doc.kCihaiT;
+        $("#kDefinition")[0].textContent = doc.kDefinition;
+        $("#kVietnamese")[0].textContent = doc.kVietnamese;
+        $("#kSemanticVariant")[0].textContent = doc.kSemanticVariant;
+        $("#kSimplifiedVariant")[0].textContent = doc.kSimplifiedVariant;
+        $("#kTraditionalVariant")[0].textContent = doc.kTraditionalVariant;
+        
+    }).catch(function () {
+        myApp.prompt(error);
+    });
+
+});
