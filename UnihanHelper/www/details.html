@@ -11,15 +11,48 @@
         </div>
         <!-- Scrollable page content-->
         <div class="page-content">
-            <div class="content-block-title">基本信息</div>
+            <div class="row">
+                <div class="col-75">
+                    <div class="content-block-title">基本信息</div>
+                    <div class="list-block">
+                        <ul>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="icon icon-form-name"></i></div>
+                                    <div class="item-inner">
+                                        Unicode码：
+                                        <div id="kkUnicodeCodePoint"></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="icon icon-form-name"></i></div>
+                                    <div class="item-inner">
+                                        笔画数：
+                                        <div id="kTotalStrokes"></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-25"><!--Character Display-->
+                    <div style="font-size:15vw;">
+                        <div id="kkCharacter"></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="content-block-title">发音</div>
             <div class="list-block">
                 <ul>
                     <li>
                         <div class="item-content">
                             <div class="item-media"><i class="icon icon-form-name"></i></div>
                             <div class="item-inner">
-                                当前字：
-                                <div id="kkCharacter"></div>
+                                普通话：<div id="kMandarin"></div>
                             </div>
                         </div>
                     </li>
@@ -27,64 +60,33 @@
                         <div class="item-content">
                             <div class="item-media"><i class="icon icon-form-name"></i></div>
                             <div class="item-inner">
-                                Unicode码：
-                                <div id="kkUnicodeCodePoint"></div>
+                                音标：
+                                <div id="kPhonetic"></div>
                             </div>
                         </div>
                     </li>
+
                     <li>
                         <div class="item-content">
                             <div class="item-media"><i class="icon icon-form-name"></i></div>
                             <div class="item-inner">
-                                笔画数：
-                                <div id="kTotalStrokes"></div>
+                                粤语：
+                                <div id="kCantonese"></div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-name"></i></div>
+                            <div class="item-inner">
+                                越南文：
+                                <div id="kVietnamese"></div>
                             </div>
                         </div>
                     </li>
                 </ul>
-                </div>
-                <div class="content-block-title">发音</div>
-                <div class="list-block">
-                    <ul>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-media"><i class="icon icon-form-name"></i></div>
-                                <div class="item-inner">
-                                    普通话：<div id="kMandarin"></div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-media"><i class="icon icon-form-name"></i></div>
-                                <div class="item-inner">
-                                    音标：
-                                    <div id="kPhonetic"></div>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="item-content">
-                                <div class="item-media"><i class="icon icon-form-name"></i></div>
-                                <div class="item-inner">
-                                    粤语：
-                                    <div id="kCantonese"></div>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="item-content">
-                                <div class="item-media"><i class="icon icon-form-name"></i></div>
-                                <div class="item-inner">
-                                    越南文：
-                                    <div id="kVietnamese"></div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+            </div>
 
                 <div class="content-block-title">释义</div>
                 <div class="list-block">

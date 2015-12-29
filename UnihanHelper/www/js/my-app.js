@@ -77,6 +77,7 @@ function loadData() {
     });
 }
 $("#appTitle")[0].textContent = "Checking database...";
+myApp.showProgressbar($('body'), 'yellow');
 var db = new PouchDB('test');
 db.info().then(function (res) {
     if (res.doc_count == 0) {
@@ -84,9 +85,12 @@ db.info().then(function (res) {
     } else {
         myApp.prompt(res.doc_count + ' lines of data already exist.');
         $("#appTitle")[0].textContent = "Unihan Helper";
+        myApp.hideProgressbar($('body'));
     };
 }).catch(function (err) {
-
+    myApp.prompt('An error occurred.'+err.toString());
+    $("#appTitle")[0].textContent = "Unihan Helper";
+    myApp.hideProgressbar($('body'));
 });
 
 function createList(count) {
@@ -123,8 +127,8 @@ myApp.onPageInit('details', function (page) {
         $("#kSimplifiedVariant")[0].textContent = doc.kSimplifiedVariant;
         $("#kTraditionalVariant")[0].textContent = doc.kTraditionalVariant;
         
-    }).catch(function () {
-        myApp.prompt(error);
+    }).catch(function (error) {
+        myApp.prompt('An error occurred!'+error.toString());
     });
 
 });
