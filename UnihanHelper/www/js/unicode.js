@@ -38,7 +38,7 @@ function updateCode() {
 
 function showDetails() {
     window.unicodeCodePoint = getCodePoint($('input')[0].value);
-    mainView.router.loadPage('details.html');
+    mainView.router.loadPage('pages/details.html');
 }
 
 if (!String.fromCodePoint) {
