@@ -1,4 +1,8 @@
+/// <reference path="unicode.utils.js"/>
+/// <reference path="unicode.data.js"/>
+/// <reference path="../vendor/pouchdb/pouchdb-5.0.0.min.js">
 // Initialize your app
+
 var myApp = new Framework7({
     modalTitle: 'UnihanHelper',
     material: true,
@@ -25,96 +29,21 @@ myApp.onPageInit('about', function (page) {
     });
 });
 
-// Generate dynamic page
-var dynamicPageIndex = 0;
-function createContentPage() {
-	mainView.router.loadContent(
-        '<!-- Top Navbar-->' +
-        '<div class="navbar">' +
-        '  <div class="navbar-inner">' +
-        '    <div class="left"><a href="#" class="back link"><i class="icon icon-back"></i><span>Back</span></a></div>' +
-        '    <div class="center sliding">Dynamic Page ' + (++dynamicPageIndex) + '</div>' +
-        '  </div>' +
-        '</div>' +
-        '<div class="pages">' +
-        '  <!-- Page, data-page contains page name-->' +
-        '  <div data-page="dynamic-pages" class="page">' +
-        '    <!-- Scrollable page content-->' +
-        '    <div class="page-content">' +
-        '      <div class="content-block">' +
-        '        <div class="content-block-inner">' +
-        '          <p>Here is a dynamic page created on ' + new Date() + ' !</p>' +
-        '          <p>Go <a href="#" class="back">back</a> or go to <a href="services.html">Services</a>.</p>' +
-        '        </div>' +
-        '      </div>' +
-        '    </div>' +
-        '  </div>' +
-        '</div>'
-    );
-	return;
-}
 
-function loadData() {
-    myApp.showPreloader('Loading data from file');
-    $.getJSON("data/output.txt").done(function (data) {
-        //console.log('hide');
-        console.log('data loaded' + data.length);
-        myApp.hidePreloader();
-        myApp.showPreloader('Adding data to PouchDB');
-        //console.log('shown');
-        db.bulkDocs(data).then(function (result) {
-            //console.log('hide');
-            myApp.hidePreloader();
-            myApp.prompt('Loaded successfully!');
-            $("#appTitle")[0].textContent = "Unihan Helper";
-            console.log(result);
-        }).catch(function (err) {
-            myApp.prompt('Error adding data to PouchDB');
-            console.log(err);
-        });
-    }).fail(function (j, t, e) {
-        console.log('getJSON error:' + t + ' | ' + e);
-    });
-}
-$("#appTitle")[0].textContent = "Checking database...";
-myApp.showProgressbar($('body'), 'yellow');
-var db = new PouchDB('test');
-db.info().then(function (res) {
-    if (res.doc_count == 0) {
-        loadData();
-    } else {
-        myApp.prompt(res.doc_count + ' lines of data already exist.');
-        $("#appTitle")[0].textContent = "Unihan Helper";
-        myApp.hideProgressbar($('body'));
-    };
-}).catch(function (err) {
-    myApp.prompt('An error occurred.'+err.toString());
-    $("#appTitle")[0].textContent = "Unihan Helper";
-    myApp.hideProgressbar($('body'));
-});
 
-function createList(count) {
-    var i, res=[];
-    for (i = 1; i <= count; i++) {
-        res.push({ title: 'Item ' + i });
-    }
-    return res;
-}
+//myApp.showProgressbar($('body'), 'yellow');
+
 
 myApp.onPageInit('about', function (page) {
-    var nums = createList(70000);
-    myApp.virtualList('.list-block.virtual-list', {
-        items: nums,
-        template: '<li class="item-content"><div clas="item-inner"><div class="item-title">{{title}}</div></div></li>'
-    });
-    console.log("initonce");
+
 });
 
 myApp.onPageInit('details', function (page) {
     //Query
-    db.get(window.unicodeCodePoint).then(function (doc) {
-        $("#kkCharacter")[0].textContent = codePointToChar(window.unicodeCodePoint);
-        $("#kkUnicodeCodePoint")[0].textContent = window.unicodeCodePoint;
+    Unicode.Data.getUnicodeData(Unicode.getCodeInt(window.queryWord), function (doc) {
+        console.log(doc);
+        $("#kkCharacter")[0].textContent = Unicode.codePointToChar(Unicode.getCodePoint(window.queryWord));
+        $("#kkUnicodeCodePoint")[0].textContent = Unicode.getCodePoint(window.queryWord);
 
         $("#kMandarin")[0].textContent = doc.kMandarin;
         $("#kPhonetic")[0].textContent = doc.kPhonetic;
@@ -126,9 +55,26 @@ myApp.onPageInit('details', function (page) {
         $("#kSemanticVariant")[0].textContent = doc.kSemanticVariant;
         $("#kSimplifiedVariant")[0].textContent = doc.kSimplifiedVariant;
         $("#kTraditionalVariant")[0].textContent = doc.kTraditionalVariant;
-        
-    }).catch(function (error) {
-        myApp.prompt('An error occurred!'+error.toString());
+    }, function (error) {
+        if (error.code==404)
+        {
+            myApp.prompt('Character is not a Unihan character!');
+        }
+        else
+        {
+            console.log('Unexpected Error' + error.toString());
+        }
     });
 
+
 });
+
+
+function updateCode() {
+    $('#code')[0].textContent = Unicode.getCodePoint($('input')[0].value);
+}
+
+function showDetails() {
+    window.queryWord = ($('input')[0].value);
+    mainView.router.loadPage('pages/details.html');
+}

@@ -92,7 +92,6 @@
   <platform name="wp8">
     <splash height="800" src="res/screens/wp8/SplashScreenImage.jpg" width="480" />
   </platform>
-  <vs:plugin name="phonegap-plugin-mobile-accessibility" src="https://github.com/phonegap/phonegap-mobile-accessibility" version="1.0.2-dev" />
   <preference name="android-minSdkVersion" value="15" />
   <preference name="android-targetSdkVersion" value="17" />
   <preference name="android-maxSdkVersion" value="23" />
@@ -104,4 +103,6 @@
       <vs:author>Radium Z</vs:author>
     </vs:platformSpecificWidget>
   </vs:platformSpecificValues>
+  <vs:plugin name="cordova-plugin-file" version="4.0.0" src="https://github.com/apache/cordova-plugin-file.git#4.0.0" />
+  <vs:plugin name="phonegap-plugin-mobile-accessibility" version="1.0.3-dev" src="https://github.com/phonegap/phonegap-mobile-accessibility.git" />
 </widget>
