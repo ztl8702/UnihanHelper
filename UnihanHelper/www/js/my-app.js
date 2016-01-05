@@ -53,8 +53,9 @@ myApp.onPageInit('details', function (page) {
         $("#kDefinition")[0].textContent = doc.kDefinition;
         $("#kVietnamese")[0].textContent = doc.kVietnamese;
         $("#kSemanticVariant")[0].textContent = doc.kSemanticVariant;
-        $("#kSimplifiedVariant")[0].textContent = doc.kSimplifiedVariant;
-        $("#kTraditionalVariant")[0].textContent = doc.kTraditionalVariant;
+        $("#kSimplifiedVariant")[0].textContent = (doc.kSimplifiedVariant) ? Unicode.codePointToChar(doc.kSimplifiedVariant) : 'N/A';
+        $("#kTraditionalVariant")[0].textContent = (doc.kTraditionalVariant) ? Unicode.codePointToChar(doc.kTraditionalVariant) : 'N/A';
+        $('#kCangjie')[0].textContent = (doc.kCangjie) ? Unicode.getCangjie(doc.kCangjie) + '(' + doc.kCangjie + ')' : 'N/A';
     }, function (error) {
         if (error.code==404)
         {

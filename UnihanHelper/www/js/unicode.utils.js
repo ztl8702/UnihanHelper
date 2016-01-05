@@ -131,5 +131,18 @@
             return undefined;
         }
     }
+
+    /**
+     * 
+     */
+    Unicode.getCangjie = function (str) {
+        var letterMap = {"W": "\u7530", "A": "\u65e5", "H": "\u7af9", "B": "\u6708", "J": "\u5341", "E": "\u6c34", "C": "\u91d1", "K": "\u5927", "I": "\u6208", "P": "\u5fc3", "Z": "\u91cd", "V": "\u5973", "Q": "\u624b", "D": "\u6728", "L": "\u4e2d", "T": "\u5e72", "Y": "\u535c", "S": "\u5c38", "G": "\u571f", "U": "\u5c71", "F": "\u706b", "N": "\u5f13", "O": "\u4eba", "R": "\u53e3", "X": "\u96e3", "M": "\u4e00"};
+        var i,res='';
+        for (i=0;i<str.length;++i)
+        {
+            res += letterMap[str[i]];
+        }
+        return res;
+    }
 })();
 
