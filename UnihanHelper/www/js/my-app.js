@@ -79,3 +79,7 @@ function showDetails() {
     window.queryWord = ($('input')[0].value);
     mainView.router.loadPage('pages/details.html');
 }
+
+function clearInput() {
+    $('input')[0].value='';
+}
